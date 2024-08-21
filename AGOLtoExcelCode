@@ -1,0 +1,39 @@
+from arcgis.gis import GIS
+import os
+import time
+import numpy as np
+########################################################################################################################
+# Variables
+########################################################################################################################
+
+agoLogin = arcgis.GIS(url=https://cenww.maps.arcgis.com,
+                      username="service_account.nww",
+                      password="gi$#1234")
+
+itemToDownload = agoLogin.content.get("abb697de4ebf4cf3a7c3e4a142d71607")
+exportLoc = os.getcwd()
+itemExportName = "WQ_SURVEY123_SONDE_DATA"
+
+########################################################################################################################
+# Export the ArcGIS Online Item
+########################################################################################################################
+
+itemToDownload.export(title=itemExportName,
+                      export_format="Excel",
+                      parameters=None,
+                      wait=True)
+
+########################################################################################################################
+# Search for and get the Newly Exported Item
+########################################################################################################################
+
+searchForExportedItem = agoLogin.content.search(query=itemExportName)
+exportedItemID = searchForExportedItem[0].id
+getTheExportedItem = agoLogin.content.get(exportedItemID)
+
+########################################################################################################################
+# Download the Newly Exported Item
+########################################################################################################################
+
+getTheExportedItem.download(save_path=exportLoc,
+                            file_name="{}.xlsx".format(itemExportName))‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍
